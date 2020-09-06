@@ -1,10 +1,12 @@
 # Visualizing COVID-19 Around the Globe 🌐
 
+## [👉 DEMO](https://coronaglobe.alexyuan.me)
+
 ### I wanted a look at COVID-19 data in a cool way so I built this "coronaglobe".
 
 I actually built this around February/March of 2020 but I kinda forgot about it. Im deciding to release it now.
 
-The data is from [Johns Hopkins University Center for Systems Science and Engineering](https://systems.jhu.edu/) and you can find their GitHub repository at [https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19).
+This globe uses data from the [Johns Hopkins University Center for Systems Science and Engineering](https://systems.jhu.edu/) and you can find their GitHub repository at [https://github.com/CSSEGISandData/COVID-19](https://github.com/CSSEGISandData/COVID-19).
 
 ### How to use this thing
 
@@ -14,10 +16,10 @@ After that, run `python3 generate_data.py` in the `data-processor` directory. It
 
 Now go to your browser and open the `index.html` file. It should work and give you something that looks like this:
 
+![Demo](demo.png)
+
 ### Why is the code so bad?
 
 I wrote it in a rush so I could put it on my University of Waterloo application. Feel free to build on it or send a pull request.
 
----
-
-Also, thanks to John Hopkins for making all of data publicly accessible.
+Thanks to John Hopkins for making all of data publicly accessible.
