@@ -1,32 +1,23 @@
-'''
-MIT License
-
-Greetings! To generate the data used by the globe just run this python file.
-If you're confused about the directory structure, you should probably just
-refrence the GitHub repository.
-'''
-
 import pandas as pd
 import json
 
 # I use this as a sanity check to see if everything worked at the end
 totals = {'cases': 0}
 
-# Data source should be in here 
-df = pd.read_csv('data.csv')
+df = pd.read_csv('time_series_covid19_confirmed_global.csv') # Data source should be in here 
 
 dates = list(df.columns[5:].fillna(0))
 locations = list(df['Country/Region'])
 latitudes = list(df['Lat'])
 longitudes = list(df['Long'])
 
-times = []
-compiled = []
+time_selections = []
+processed_data = []
 
 # I use this as a sanity check to see if everything worked at the end
 largest_cases = {'country': '', 'number': 0}
 
-# You might want to consider adjusting this value since American cases are skyrocketing
+# You might want to consider adjusting this value since American is suffering from COVID explosion
 MAX_CASE = df.iloc[:, -1].max()
 
 for date in dates:
@@ -50,16 +41,16 @@ for date in dates:
         if date == dates[-1]:
             totals['cases'] += cases
     
-    compiled.append(new)
-    times.append(date)
+    processed_data.append(new)
+    time_selections.append(date)
 
 with open('../generate.json', 'w') as file:
-    json.dump(compiled, file)
+    json.dump(processed_data, file)
     print('Dumped to ../generate.json')
 
-with open('../times.json', 'w') as file:
-    json.dump(times, file)
-    print('Dumped to ../times.json')
+with open('../time_selections.json', 'w') as file:
+    json.dump(time_selections, file)
+    print('Dumped to ../time_selections.json')
 
 print('Totals: {}'.format(totals))
 print('Largest Cases: {}'.format(largest_cases))

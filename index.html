@@ -1,153 +1,175 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>🌐 Coronamap</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
 
     <link
-        href="https://fonts.googleapis.com/css?family=DM+Sans|DM+Serif+Display|DM+Serif+Text|Nunito|Roboto|Roboto+Mono|Lato&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+      href="https://fonts.googleapis.com/css?family=DM+Sans|DM+Serif+Display|DM+Serif+Text|Nunito|Roboto|Roboto+Mono|Lato&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
 
     <style type="text/css">
-        * {
-            font-family: DM Sans !important;
-        }
+      * {
+        font-family: DM Sans !important;
+      }
 
-        html {
-            height: 100%;
-        }
+      html {
+        height: 100%;
+      }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background: #000000 url(loading.gif) center center no-repeat;
-            color: #ffffff;
-            font-size: 13px;
-            line-height: 20px;
-            height: 100%;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #000000 url(loading.gif) center center no-repeat;
+        color: #ffffff;
+        font-size: 13px;
+        line-height: 20px;
+        height: 100%;
+      }
 
-        #info {
-            font-size: 12px;
-            position: absolute;
-            bottom: 5px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 3px;
-            right: 10px;
-            padding: 10px;
-        }
+      #info {
+        font-size: 12px;
+        position: absolute;
+        bottom: 5px;
+        background-color: rgba(0, 0, 0, 0.8);
+        border-radius: 3px;
+        right: 10px;
+        padding: 10px;
+      }
 
-        #currentInfo {
-            width: 270px;
-            position: absolute;
-            left: 20px;
-            top: 400px;
+      #currentInfo {
+        width: 270px;
+        position: absolute;
+        left: 20px;
+        top: 400px;
 
-            background-color: rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 0, 0, 0.2);
 
-            border-top: 1px solid rgba(255, 255, 255, 0.4);
-            padding: 10px;
-        }
+        border-top: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 10px;
+      }
 
-        a {
-            color: #aaa;
-            text-decoration: none;
-        }
+      a {
+        color: #aaa;
+        text-decoration: none;
+      }
 
-        a:hover {
-            text-decoration: underline;
-        }
+      a:hover {
+        text-decoration: underline;
+      }
 
-        .bull {
-            padding: 0 5px;
-            color: #555;
-        }
+      .bull {
+        padding: 0 5px;
+        color: #555;
+      }
 
-        #title {
-            position: absolute;
-            top: 20px;
-            width: 360px;
-            left: 20px;
-            background-color: rgba(0, 0, 0, 0.2);
-            border-radius: 3px;
-        }
+      #title {
+        position: absolute;
+        top: 20px;
+        width: 360px;
+        left: 20px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+      }
 
-        .time {
-            line-height: 26px;
-            height: 30px;
-            text-align: center;
-            float: left;
-            width: 90px;
-            color: rgba(255, 255, 255, 0.4);
+      .time {
+        line-height: 26px;
+        height: 30px;
+        text-align: center;
+        float: left;
+        width: 90px;
+        color: rgba(255, 255, 255, 0.4);
 
-            cursor: pointer;
-            -webkit-transition: all 0.1s ease-out;
-        }
+        cursor: pointer;
+        -webkit-transition: all 0.1s ease-out;
+      }
 
-        .time:hover,
-        .time.active {
-            font-size: 23px;
-            color: #fff;
-        }
+      .time:hover,
+      .time.active {
+        font-size: 23px;
+        color: #fff;
+      }
 
-        #ce span {
-            display: none;
-        }
+      #ce span {
+        display: none;
+      }
 
-        #ce {
-            width: 107px;
-            height: 55px;
-            display: block;
-            position: absolute;
-            bottom: 15px;
-            left: 20px;
-            background: url(ce.png);
-        }
+      #ce {
+        width: 107px;
+        height: 55px;
+        display: block;
+        position: absolute;
+        bottom: 15px;
+        left: 20px;
+        background: url(ce.png);
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div id="container"></div>
 
     <div id="info">
-        <strong><a href="http://www.chromeexperiments.com/globe">Powered by WebGL Globe</a></strong> <span
-            class="bull">&bull;</span> Data
-        acquired from <a href="https://systems.jhu.edu/">Johns
-            Hopkins CSSE</a> <span class="bull">&bull;</span> Built by <a href="https://alexyuan.me">Alex Yuan</a>
+      <strong
+        ><a href="http://www.chromeexperiments.com/globe"
+          >Powered by WebGL Globe</a
+        ></strong
+      >
+      <span class="bull">&bull;</span> Data acquired from
+      <a href="https://systems.jhu.edu/">Johns Hopkins CSSE</a>
+      <span class="bull">&bull;</span> Built by
+      <a href="https://alexyuan.me">Alex Yuan</a>
     </div>
 
     <div id="title">
-        <h2>Visualizing COVID-19 Around the Globe 🌐</h2>
-        <p>This globe uses data from <a href="https://systems.jhu.edu/">Johns
-                Hopkins CSSE</a>.
-            Coordinate locations and case numbers are limited by the
-            percision and accuracy of the data. </p>
-        <p>Points of the map may represent, the city, province, or country of
-            case(s). Data on the map is updated when possible. A huge thanks to Johns Hopkins CSSE and all the
-            organizations involved with gathering this data 👍.
-        </p>
-        <p>The Johns Hopkins CSSE has a GitHub repository for their data available <a
-                href="https://github.com/CSSEGISandData/COVID-19">here</a>.</p>
-        <p><i>Australia, Canada and China are reported at the province/state level. Dependencies of the Netherlands, the
-                UK, France and
-                Denmark are listed under the province/state level. The US and other countries are at the country
-                level.</i></p>
-        <div class="dropdown pt-2">
-            <div class="text-center">
-                <div class="alert bg-black text-white border-primary" role="alert">
-                    <h4 class="alert-heading" style="font-family: Roboto Mono !important;">Time on Globe (MM/DD/YY)</h4>
-                    <h1 id="date_label" style="font-family: Roboto Mono !important;"></h1>
-                </div>
-            </div>
-            <div class="input-group">
-                <label for="date_slider">Drag the slider below to change the date and time</label>
-                <input type="range" class="form-control-range" id="date_slider" min="0" max="0">
-            </div>
+      <h2>Visualizing COVID-19 Around the Globe 🌐</h2>
+      <p>
+        This globe uses data from the
+        <a href="https://systems.jhu.edu/"
+          >Johns Hopkins University Center for Systems Science and
+          Engineering</a
+        >. Coordinate locations and case numbers are limited by the percision
+        and accuracy of the data.
+      </p>
+      <p>
+        The Johns Hopkins CSSE has a GitHub repository for their data available at 
+        <a href="https://github.com/CSSEGISandData/COVID-19">https://github.com/CSSEGISandData/COVID-19</a>.
+      </p>
+      <div class="dropdown pt-2">
+        <div class="text-center">
+          <div class="alert bg-black text-white border-primary" role="alert">
+            <h4
+              class="alert-heading"
+              style="font-family: Roboto Mono !important"
+            >
+              Time on Globe (MM/DD/YY)
+            </h4>
+            <h1
+              id="date_label"
+              style="font-family: Roboto Mono !important"
+            ></h1>
+          </div>
         </div>
+        <div class="input-group">
+          <label for="date_slider"
+            >Drag the slider below to change the date and time</label
+          >
+          <input
+            type="range"
+            class="form-control-range"
+            id="date_slider"
+            min="0"
+            max="0"
+          />
+        </div>
+      </div>
     </div>
 
     <!--
@@ -156,73 +178,86 @@
     </a>
     -->
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+      integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js"
+      integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ=="
+      crossorigin="anonymous"
+    ></script>
 
     <script type="text/javascript" src="third-party/Detector.js"></script>
     <script type="text/javascript" src="third-party/three.min.js"></script>
     <script type="text/javascript" src="third-party/Tween.js"></script>
     <script type="text/javascript" src="globe.js"></script>
     <script type="text/javascript">
-        if (!Detector.webgl) {
-            Detector.addGetWebGLMessage();
-        } else {
-            $.getJSON('generate.json', function (server_data) {
-                var settime = function (globe, t) {
-                    return function () {
-                        new TWEEN.Tween(globe).to({
-                            time: t / dates.length
-                        }, 500).easing(TWEEN.Easing.Cubic.EaseOut).start();
-                        var y = document.getElementById('year' + dates[t]);
-                    };
-                };
+      if (!Detector.webgl) {
+        Detector.addGetWebGLMessage();
+      } else {
+        $.getJSON("generate.json", function (server_data) {
+          var settime = function (globe, t) {
+            return function () {
+              new TWEEN.Tween(globe)
+                .to(
+                  {
+                    time: t / dates.length,
+                  },
+                  500
+                )
+                .easing(TWEEN.Easing.Cubic.EaseOut)
+                .start();
+              var y = document.getElementById("year" + dates[t]);
+            };
+          };
 
-                var data = server_data;
-                var dates = [];
+          var data = server_data;
+          var dates = [];
 
-                $("#date_slider").attr("max", data.length - 1);
-                $("#date_slider").on("input change", function () {
-                    slider_val = $("#date_slider").val();
-                    $("#date_label").text(dates[slider_val]);
-                    settime(globe, slider_val)();
-                });
+          $("#date_slider").attr("max", data.length - 1);
+          $("#date_slider").on("input change", function () {
+            slider_val = $("#date_slider").val();
+            $("#date_label").text(dates[slider_val]);
+            settime(globe, slider_val)();
+          });
 
-                for (var i = 0; i < data.length; i++) {
-                    dates.push(data[i][0]);
-                }
-                $("#date_slider").val(data.length - 1);
-                $("#date_label").text(dates[data.length - 1]);
+          for (var i = 0; i < data.length; i++) {
+            dates.push(data[i][0]);
+          }
+          $("#date_slider").val(data.length - 1);
+          $("#date_label").text(dates[data.length - 1]);
 
-                var container = document.getElementById('container');
-                var globe = new DAT.Globe(container);
-                var i, tweens = [];
+          var container = document.getElementById("container");
+          var globe = new DAT.Globe(container);
+          var i,
+            tweens = [];
 
-                $(".dropdown-item").hover(function () {
-                    $("#selectedDate").text($(this).text());
-                });
+          $(".dropdown-item").hover(function () {
+            $("#selectedDate").text($(this).text());
+          });
 
-                TWEEN.start();
+          TWEEN.start();
 
-                window.data = data;
-                for (i = 0; i < data.length; i++) {
-                    globe.addData(data[i][1], {
-                        format: 'magnitude',
-                        name: data[i][0],
-                        animated: true
-                    });
-                }
-                globe.createPoints();
-                settime(globe, dates.length - 1)();
-                globe.animate();
+          window.data = data;
+          for (i = 0; i < data.length; i++) {
+            globe.addData(data[i][1], {
+              format: "magnitude",
+              name: data[i][0],
+              animated: true,
             });
-        }
+          }
+          globe.createPoints();
+          settime(globe, dates.length - 1)();
+          globe.animate();
+        });
+      }
     </script>
-</body>
-
+  </body>
 </html>
